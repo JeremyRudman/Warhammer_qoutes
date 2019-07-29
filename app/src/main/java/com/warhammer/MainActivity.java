@@ -1,5 +1,6 @@
 package com.warhammer;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -24,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ArrayList<String> qoutes = new ArrayList<>();
+        final ArrayList<String> qoutes = new ArrayList<>();
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(
@@ -56,12 +59,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         final TextView qoute = (TextView) findViewById(R.id.warhammer_qoute);
-
+        final Random random = new Random();
+        qoute.setText(qoutes.get(random.nextInt(47)));
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                qoute.setText(qoutes.get(random.nextInt(47)));
             }
+
         });
 
         final String NOTIFICATION_CHANNEL_ID = "channel_id";
@@ -83,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
             notificationChannel.setVibrationPattern(new long[]{
                     500,
                     500,
-                    500,
-                    500,
                     500
             });
             //Sets whether notifications from these Channel should be visible on Lockscreen or not
@@ -92,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
         }
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannel(notificationChannel);
-        notifications(NOTIFICATION_CHANNEL_ID,qoutes);
+        startAlarm(true,true);
+
     }
 
     public void notifications(String CHANNEL_ID,ArrayList<String> qoutes) {
@@ -110,12 +115,28 @@ public class MainActivity extends AppCompatActivity {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, builder.build());
+    }
+
+    private void startAlarm(boolean isNotification, boolean isRepeat) {
+        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent myIntent;
+        PendingIntent pendingIntent;
+
+        // SET TIME HERE
+        Calendar calendar= Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,12);
+        calendar.set(Calendar.MINUTE,5);
 
 
+        myIntent = new Intent(MainActivity.this,MyReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
 
 
-
-
+        if(!isRepeat)
+            manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+3000,pendingIntent);
+        else
+            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 }
+
 
