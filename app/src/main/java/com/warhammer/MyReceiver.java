@@ -60,7 +60,7 @@ public class MyReceiver extends BroadcastReceiver {
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_stat_hammer)
-                .setContentTitle("Warhammer Qoute of The Day")
+                .setContentTitle("Warhammer Quote of The Day")
                 .setContentIntent(pendingIntent)
                 .setContentText(qoutes.get(random.nextInt(47)))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(qoutes.get(random.nextInt(47))))
