@@ -1,20 +1,16 @@
 package com.warhammer;
 
 import android.app.AlarmManager;
-import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -88,34 +84,21 @@ public class MainActivity extends AppCompatActivity {
             //Set the vibration pattern for notifications. Pattern is in milliseconds with the format {delay,play,sleep,play,sleep...}
             notificationChannel.setVibrationPattern(new long[]{
                     500,
-                    500,
+                    300,
                     500
             });
             //Sets whether notifications from these Channel should be visible on Lockscreen or not
             notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
         }
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(notificationChannel);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
         startAlarm(true,true);
 
     }
 
-    public void notifications(String CHANNEL_ID,ArrayList<String> qoutes) {
-        Random random = new Random();
-        final TextView qoute = (TextView) findViewById(R.id.warhammer_qoute);
-        String message=qoutes.get(random.nextInt(47));
-        qoute.setText(message);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_stat_onesignal_default)
-                .setContentTitle("Warhammer Qoute of The Day")
-                .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true);
-
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0, builder.build());
-    }
 
     private void startAlarm(boolean isNotification, boolean isRepeat) {
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -124,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
 
         // SET TIME HERE
         Calendar calendar= Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,12);
-        calendar.set(Calendar.MINUTE,5);
+        calendar.set(Calendar.HOUR_OF_DAY,15);
+        calendar.set(Calendar.MINUTE,30);
 
 
         myIntent = new Intent(MainActivity.this,MyReceiver.class);
