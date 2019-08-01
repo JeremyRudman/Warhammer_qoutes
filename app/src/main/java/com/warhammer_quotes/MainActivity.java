@@ -1,4 +1,4 @@
-package com.warhammer;
+package com.warhammer_quotes;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -13,7 +13,6 @@ import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;

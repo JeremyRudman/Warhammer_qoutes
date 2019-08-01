@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.warhammer">
+    package="com.warhammer_quotes">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".BootReceiver"
+        <receiver android:name="com.warhammer_quotes.BootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -18,13 +18,13 @@
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".MyReceiver"/>
+        <receiver android:name="com.warhammer_quotes.MyReceiver"/>
 
         <service
-            android:name=".MyService"
+            android:name="com.warhammer_quotes.MyService"
             android:enabled="true"
             android:exported="true"></service>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.warhammer_quotes.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

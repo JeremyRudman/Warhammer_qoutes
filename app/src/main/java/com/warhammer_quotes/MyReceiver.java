@@ -1,4 +1,4 @@
-package com.warhammer;
+package com.warhammer_quotes;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;

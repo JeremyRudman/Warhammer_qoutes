@@ -1,10 +1,9 @@
-package com.warhammer;
+package com.warhammer_quotes;
 
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
 public class MyNewIntentService extends IntentService {

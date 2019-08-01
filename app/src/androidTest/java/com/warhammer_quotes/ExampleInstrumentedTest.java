@@ -1,4 +1,4 @@
-package com.warhammer;
+package com.warhammer_quotes;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

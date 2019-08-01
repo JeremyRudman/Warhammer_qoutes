@@ -1,4 +1,4 @@
-package com.warhammer;
+package com.warhammer_quotes;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
