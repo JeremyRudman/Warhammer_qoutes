@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/warhammer_qoute"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="A good soldier obeys without question. A good officer commands without doubt."
@@ -37,6 +37,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/warhammer_qoute"
-        app:layout_constraintVertical_bias="0.213" />
+        app:layout_constraintVertical_bias="0.152" />
 
 </android.support.constraint.ConstraintLayout>

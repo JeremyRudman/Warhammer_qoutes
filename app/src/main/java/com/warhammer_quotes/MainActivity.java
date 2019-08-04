@@ -20,8 +20,11 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,14 +56,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        final Boolean[] seen = new Boolean[47];
+        Arrays.fill(seen,false);
         final TextView qoute = (TextView) findViewById(R.id.warhammer_qoute);
         final Random random = new Random();
-        qoute.setText(qoutes.get(random.nextInt(47)));
+        final int k=random.nextInt(47);
+        qoute.setText(qoutes.get(k));
+        seen[k]=true;
         Button button = (Button) findViewById(R.id.button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qoute.setText(qoutes.get(random.nextInt(47)));
+
+
+                int i=random.nextInt(47);
+                if(!Arrays.asList(seen).contains(false)){
+                    Arrays.fill(seen,false);
+                    i = random.nextInt(47);
+                }
+                else {
+                    while (seen[i]) {
+                        i = random.nextInt(47);
+                    }
+                }
+                seen[i]=true;
+                qoute.setText(qoutes.get(i));
             }
 
         });
@@ -83,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
             //Set the vibration pattern for notifications. Pattern is in milliseconds with the format {delay,play,sleep,play,sleep...}
             notificationChannel.setVibrationPattern(new long[]{
                     500,
-                    300,
                     500
             });
             //Sets whether notifications from these Channel should be visible on Lockscreen or not
