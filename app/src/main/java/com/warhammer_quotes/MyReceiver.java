@@ -54,15 +54,15 @@ public class MyReceiver extends BroadcastReceiver {
                 FLAG_ONE_SHOT );
 
 
-
+        String text = qoutes.get(random.nextInt(47));
         builder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_stat_hammer)
                 .setContentTitle("Warhammer Quote of The Day")
                 .setContentIntent(pendingIntent)
-                .setContentText(qoutes.get(random.nextInt(47)))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(qoutes.get(random.nextInt(47))))
+                .setContentText(text)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                 .setContentInfo("Info");
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
